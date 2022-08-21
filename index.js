@@ -20,18 +20,24 @@ if(prompt(`Hola ${nombreDeJugador} venis a jugar Blackjack?`).toLowerCase() == "
 
         if( apuesta > fichas){
             apuesta = fichas;
+            fichas = 0;
             alert("Apostaste todas tus fichas");
         }else{
-            alert(`Tu apuesta es de ${apuesta}`);
+            fichas = fichas - apuesta;
+            alert(`Tu apuesta es de ${apuesta} \nTe quedan ${fichas} fichas`);
         }
 
+        let apuesta_finalizada = blackjack(apuesta);
+        fichas = fichas + parseInt(apuesta_finalizada);
 
+        alert(`Tus fichas ahora son ${fichas}`)
+        
 
-        if(prompt("Seguimos una mano mas?").toLowerCase() == "no"){
+        if((prompt("Seguimos una mano mas?").toLowerCase() == "no")){
             jugar = false;
         }
 
-        if(fichas > 0){
+        if(fichas <= 0){
             alert("Te quedaste sin fichas")
         }
 
@@ -48,6 +54,36 @@ function numeros(min, max) {
     return Math.random() * (max - min) + min;
   }
   
-function blackjack(apuest){
+function blackjack(apuesta){
 
+    let jugador = parseInt(numeros(4,10));
+    let dealer = parseInt(numeros(7,10));
+
+    jugador = jugador + parseInt(numeros(1,10));
+
+    alert(`${nombreDeJugador} : ${jugador} \nDealer: ${dealer}`);
+
+    if(prompt("Pedis carta").toLowerCase() == "si"){
+        jugador = jugador + parseInt(numeros(1,10));
+        alert(`${nombreDeJugador} : ${jugador} \nDealer: ${dealer}`);
+    }
+
+    if(jugador > 21){
+        apuesta = 0;
+        alert('Perdistes')
+        return 0;
+    }
+
+    dealer = dealer + parseInt(numeros(1,10));
+    alert(`${nombreDeJugador} : ${jugador} \nDealer: ${dealer}`);
+
+    if(dealer < jugador){
+        alert(`Ganaste ${apuesta*2}`)
+        return apuesta*2;
+    }else{
+        alert('Perdiste')
+        return 0;
+    }
+
+    
 }
