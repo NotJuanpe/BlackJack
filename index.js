@@ -1,9 +1,13 @@
+
+/* Ingresa nombre del Jugador */
 let nombreDeJugador = prompt("Ingrese su nombre");
 
+/* Se consulta si se va a ingresar a jugar al blackjack */
 if(prompt(`Hola ${nombreDeJugador} venis a jugar Blackjack?`).toLowerCase() == "si"){
     alert(`${nombreDeJugador} como veo que no tenes fichas te voy a regalar 10!`);
     let fichas = 10;
     
+    /* Se explica el blackjack */
     if(prompt("Sabes jugar al Black").toLowerCase() == "no"){
 
         alert("Es muy simple el objetivo es juntar mas puntos que yo en tu mano siendo el numero mayor el 21, puedes pedir carta o plantarte");
@@ -14,10 +18,10 @@ if(prompt(`Hola ${nombreDeJugador} venis a jugar Blackjack?`).toLowerCase() == "
 
     let jugar = true;
 
+    /* Ciclo de juego */
     while(jugar && (fichas > 0)){
 
         apuesta = prompt("Cuantas fichas queres apostar");
-
         if( apuesta > fichas){
             apuesta = fichas;
             fichas = 0;
@@ -50,10 +54,12 @@ else{
 
 alert("Hasta la proxima")
 
+/* Funcion para generar numeros aleatorio entre valores */
 function numeros(min, max) {
     return Math.random() * (max - min) + min;
   }
-  
+
+/* Funcionamiento del blackjack */
 function blackjack(apuesta){
 
     let jugador = parseInt(numeros(4,10));
